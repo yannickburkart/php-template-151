@@ -1,9 +1,9 @@
 {
-    "name": "ihrname/Datenbankprojekt",
+    "name": "yannickburkart/Datenbankprojekt",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "ihrname\\": "src/"
+            "yannickburkart\\": "src/"
         }
     },
     "require": {

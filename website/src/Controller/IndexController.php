@@ -1,18 +1,18 @@
 <?php
 
-namespace ihrname\Controller;
+namespace yannickburkart\Controller;
 
-use ihrname\SimpleTemplateEngine;
+use yannickburkart\SimpleTemplateEngine;
 
 class IndexController 
 {
   /**
-   * @var ihrname\SimpleTemplateEngine Template engines to render output
+   * @var yannickburkart\SimpleTemplateEngine Template engines to render output
    */
   private $template;
   
   /**
-   * @param ihrname\SimpleTemplateEngine
+   * @param yannickburkart\SimpleTemplateEngine
    */
   public function __construct(SimpleTemplateEngine $template)
   {
@@ -26,4 +26,9 @@ class IndexController
   public function greet($name) {
   	echo $this->template->render("hello.html.php", ["name" => $name]);
   }
+  public function showLogin()
+  {
+  	echo $this->template->render("login.html.php");
+  }
+ 
 }
