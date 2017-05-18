@@ -1,27 +1,38 @@
 <?php
 
-use yannickburkart\Controller\LoginController;
-
 error_reporting(E_ALL);
+session_start();
 
 require_once("../vendor/autoload.php");
-$tmpl = new yannickburkart\SimpleTemplateEngine(__DIR__ . "/../templates/");
 
+$config = parse_ini_file(__DIR__ . "/../config.ini");
+
+$factory = new yannickburkart\Factory($config);
+$pdo = $factory->getPDO();
+$tmpl = $factory->getTemplateEngine();
+
+$loginService = $factory->getLoginService();
 
 switch($_SERVER["REQUEST_URI"]) {
 	case "/":
-		(new yannickburkart\Controller\IndexController($tmpl))->homepage();
+		($factory->getIndexController())->homepage();
 		break;
 	case "/testrout":
 		echo "test";
 		break;
 		case "/login":
-			(new LoginController($tmpl))->showLogin();
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				
+				($factory->getLoginController())->login($_POST);		
+			}
+			else{
+				($factory->getLoginController())->showLogin();
+			}
 		break;
 	default:
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
-			(new yannickburkart\Controller\IndexController($tmpl))->greet($matches[1]);
+			($factory->getIndexController())->greet($matches[1]);
 			break;
 		}
 		echo "Not Found";

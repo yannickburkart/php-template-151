@@ -28,7 +28,8 @@ class IndexController
   }
   public function showLogin()
   {
-  	echo $this->template->render("login.html.php");
+  	
+   	echo $this->template->render("login.html.php");
   }
  
 }
