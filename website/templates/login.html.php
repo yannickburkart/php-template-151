@@ -1,24 +1,40 @@
 <html>
 <head>
-<title>Login Test</title>
+<title>Login</title>
+<style type="text/css">
+
+
+ul{
+	list-style-type: none;
+	margin:5px;
+}
+li{
+margin:5px;
+}
+</style>
 </head>
+
 <body>
    
-  	  <form action="" method="post">
-      <h2>Enter Username and Password</h2> 
-      <label>email:</label>
-      <input type="email" name="email" >
-      <label>Email:</label>
-      <input type="password" name="password">
-       <button  type = "submit" name = "login">Login</button>
-       </form>
+   <div>
+	   <form action="" method="post">
+		   <ul>
+		   	<li><label>Email</label></li>
+		   	<li> <input type="email" name="email"></li>
+		   	<li><label>Password</label></li>
+		   	<li> <input type="password" name="password"></li>
+		   	<li> <a href="createAccount">create account</a><li>
+		   	<li><button  type = "submit" name = "login">Login</button></li>
+		   </ul>
+	   </form>
+   </div>
 </body>
 
 
 <!-- for encrzptioed password -->
-$password=string;
-$hash= password_hash($password, PASSWORD_DEFAULT); //generate
+<!-- $password=string; -->
+<!-- $hash= password_hash($password, PASSWORD_DEFAULT); //generate -->
 
-$success = password_verifz($password, $hash); //check login
+<!-- $success = password_verifz($password, $hash); //check login -->
 
 </html>

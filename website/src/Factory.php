@@ -22,6 +22,11 @@ namespace yannickburkart;
  		return new Controller\IndexController($this->getTemplateEngine());
  	
  	}
+ 	public function getHomeController()
+ 	{
+ 		return new Controller\HomeController($this->getTemplateEngine());
+ 	
+ 	}
  	public function getPDO()
  	{
  		return new \PDO(

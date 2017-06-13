@@ -10,6 +10,7 @@ class IndexController
    * @var yannickburkart\SimpleTemplateEngine Template engines to render output
    */
   private $template;
+
   
   /**
    * @param yannickburkart\SimpleTemplateEngine
@@ -17,19 +18,24 @@ class IndexController
   public function __construct(SimpleTemplateEngine $template)
   {
      $this->template = $template;
+     
   }
-
   public function homepage() {
-    echo "INDEX";
+  	echo $this->template->render("login.html.php");
   }
-
-  public function greet($name) {
-  	echo $this->template->render("hello.html.php", ["name" => $name]);
+  public function home(){
+  	  	echo $this->template->render("home.html.php");
   }
+  public  function showcreateacc(){
+  	  	echo $this->template->render("createacc.html.php");
+  	
+  }
+  
   public function showLogin()
   {
-  	
-   	echo $this->template->render("login.html.php");
+  	   	echo $this->template->render("login.html.php");
   }
+  
+ 
  
 }

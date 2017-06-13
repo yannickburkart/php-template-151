@@ -15,10 +15,13 @@ $loginService = $factory->getLoginService();
 
 switch($_SERVER["REQUEST_URI"]) {
 	case "/":
-		($factory->getIndexController())->homepage();
-		break;
-	case "/testrout":
-		echo "test";
+		if (isset($_SESSION["email"])){
+			header( "Location: /home");
+			}
+		else{
+			//nicht eingelogt
+			header( "Location: /login");
+		}
 		break;
 		case "/login":
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,7 +32,44 @@ switch($_SERVER["REQUEST_URI"]) {
 				($factory->getLoginController())->showLogin();
 			}
 		break;
-	default:
+		case "/home":
+			
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				($factory->getHomeController())->logout($_SESSION);
+			}
+			else if(isset($_SESSION["email"]))
+			{
+				($factory->getIndexController())->home($_SESSION);
+			}
+			else{
+				header( "Location: /login");
+					}
+			break;
+		case "/createAccount":
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				($factory->getLoginController())->createacc($_POST);
+			}
+			else 
+			{
+				($factory->getIndexController())->showcreateacc();
+				
+			}
+			break;
+		case "/statistic":
+				($factory->getLoginController())->statistic();
+			break;
+		case "/savetime":
+				if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+					($factory->getLoginController())->saveTime($_POST);					
+				}
+				else if(isset($_SESSION["email"]))
+				{		
+					($factory->getIndexController())->home($_SESSION);
+				}
+				else{
+					die("asdf");
+					header( "Location: /login");
+				}
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
 			($factory->getIndexController())->greet($matches[1]);
