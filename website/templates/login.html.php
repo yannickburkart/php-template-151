@@ -2,29 +2,25 @@
 <head>
 <title>Login</title>
 <style type="text/css">
-
-
-ul{
-	list-style-type: none;
-	margin:5px;
-}
-li{
-margin:5px;
-}
+<?php include ("style.css");?>
 </style>
 </head>
 
-<body>
-   
-   <div>
+<body id="logbody">
+<div class="title">
+<h1 style="margin: 0 auto; display: table;">M151</h1>
+<hr>
+<h1 style="margin: 0 auto; display: table;">Yannick Burkart</h1>
+</div>
+   <div id="content2">
 	   <form action="" method="post">
-		   <ul>
-		   	<li><label>Email</label></li>
-		   	<li> <input type="email" name="email"></li>
-		   	<li><label>Password</label></li>
-		   	<li> <input type="password" name="password"></li>
-		   	<li> <a href="createAccount">create account</a><li>
-		   	<li><button  type = "submit" name = "login">Login</button></li>
+		   <ul class="logul">
+		   	<li class="logli"><label>Email</label></li>
+		   	<li class="logli"> <input type="email" name="email"></li>
+		   	<li class="logli"><label>Password</label></li>
+		   	<li class="logli"> <input type="password" name="password"></li>
+		   	<li class="logli"> <a href="createAccount">create account</a><li>
+		   	<li class="logli"><button  type = "submit" name = "login">Login</button></li>
 		   </ul>
 	   </form>
    </div>

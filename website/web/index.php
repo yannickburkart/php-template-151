@@ -13,6 +13,8 @@ $tmpl = $factory->getTemplateEngine();
 
 $loginService = $factory->getLoginService();
 
+
+
 switch($_SERVER["REQUEST_URI"]) {
 	case "/":
 		if (isset($_SESSION["email"])){
@@ -39,7 +41,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			}
 			else if(isset($_SESSION["email"]))
 			{
-				($factory->getIndexController())->home($_SESSION);
+				($factory->getLoginController())->loadToday($_SESSION);
 			}
 			else{
 				header( "Location: /login");
@@ -64,7 +66,7 @@ switch($_SERVER["REQUEST_URI"]) {
 				}
 				else if(isset($_SESSION["email"]))
 				{		
-					($factory->getIndexController())->home($_SESSION);
+					($factory->getIndexController())->loadToday($_SESSION);
 				}
 				else{
 					die("asdf");

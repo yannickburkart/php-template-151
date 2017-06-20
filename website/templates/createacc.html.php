@@ -2,29 +2,23 @@
 <head>
 <title>Create account</title>
 <style type="text/css">
-
-
-ul{
-	list-style-type: none;
-	margin:5px;
-}
-li{
-margin:5px;
-}
+<?php include ("style.css");?>
 </style>
+
 </head>
 
-<body>
-   <div>
+<body id="logbody">
+   <div id="content2">
 	   <form action="" method="post">
-		   <ul>
-		   	<li><label>Email</label></li>
-		   	<li> <input type="email" name="email" value=""></li>
-		   	<li><label>Password</label></li>
-		   	<li> <input type="password" name="password" id="password"></li>
-		   	<li><label>Repeat password</label></li>
-		   	<li> <input type="password" name="passwordr" id="password_confirm" oninput="check(this)"></li>
-		   	<li><button type="submit" name="create">create</button></li>
+		   <ul class="logul">
+		   	<li class="logli"><label>Email</label></li>
+		   	<li class="logli"> <input type="email" name="email" value=""></li>
+		   	<li class="logli"><label>Password</label></li>
+		   	<li class="logli"> <input type="password" name="password" id="password"></li>
+		   	<li class="logli"><label>Repeat password</label></li>
+		   	<li class="logli"> <input type="password" name="passwordr" id="password_confirm" oninput="check(this)"></li>
+   		   	<li class="logli"> <a href="login">login</a><li>  	
+		   	<li class="logli"><button type="submit" name="create">create</button></li>
 		   </ul>
 	   </form>
    </div>

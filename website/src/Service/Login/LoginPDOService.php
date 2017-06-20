@@ -49,7 +49,16 @@ class LoginPDOService implements LoginService
 		$worksec=intval($worksec);
 		$breaksec=intval($breaksec);
 		
+		$stmt = $this ->pdo->prepare("SELECT SUM(worksec),Sum(breaksec)  FROM work WHERE User_email=? AND Date Like ?");
+		$stmt->bindValue(1, $username);
+		$heute=(string)date("Y-m-d");
+		$heute=$heute."%";
+		$stmt->bindValue(2,$heute);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
 		
+		$worksec=$worksec-$result[0][0];
+		$breaksec=$breaksec-$result[0][1];
 		
 		$stmt = $this ->pdo->prepare("SELECT * FROM user WHERE email=? ");
 		$stmt->bindValue(1, $username);
@@ -75,8 +84,31 @@ class LoginPDOService implements LoginService
 		$result = $stmt->fetchAll();
 		$_SESSION["worksec"]=$result[0][0];
 		$_SESSION["breaksec"]=$result[0][1];
+		$stmt = $this ->pdo->prepare("SELECT SUM(worksec),Sum(breaksec)  FROM work WHERE User_email=? AND Date Like ?");
+		$stmt->bindValue(1, $username);
+		$heute=(string)date("Y-m-d");
+		$heute=$heute."%";
+		$stmt->bindValue(2,$heute);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		$_SESSION["worksectoday"]=$result[0][0];
+		$_SESSION["breaksectoday"]=$result[0][1];
 		return true;
 		
+    }
+    public function loadToday($username)
+    {
+       	$stmt = $this ->pdo->prepare("SELECT SUM(worksec),Sum(breaksec)  FROM work WHERE User_email=? AND Date Like ?");
+    	$stmt->bindValue(1, $username);
+    	$heute=(string)date("Y-m-d");
+    	$heute=$heute."%";
+      	$stmt->bindValue(2,$heute);
+     	$stmt->execute();
+    	$result = $stmt->fetchAll();
+    	$_SESSION["worksec"]=$result[0][0];
+    	$_SESSION["breaksec"]=$result[0][1];
+    	return true;
+    
     }
 }
 ?>

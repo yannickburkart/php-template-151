@@ -1,103 +1,25 @@
-
 <html>
 <head>
-<style type="text/css">
-#hlist {
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333333;
-    height:50px;
-}
-
-#hli {
-    float: left;
-}
-
-#hli a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-}
-#hli button {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    border:none;
-    background:none;
-    font-size:15px;
-}
-
-#hli a:hover {
-    background-color: #111111;
-    cursor:pointer;
-}
-#hli button:hover {
-    background-color: #111111;
-    cursor:pointer;
-}
-#buttonlist{
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-    
-}
-#bli{
-	margin:10px;
-}
-.block{
-float:left;
-margin-right: 10px;
-}
-#content{
-width: 350px;
-float:left;
-margin-left: 150px;
-margin-right: auto;
-}
-
-#footer{
- 	position:fixed;
-    bottom:0;
-    background-color:#333;
-    width:100%;
-    text-align:center;
-}
-#footer p{
-display: inline-block;
-color:white;
-
-}
-button{
-    cursor:pointer;
-}
-</style>
 <title>Statistic</title>
+<style>
+<?php include ("style.css");?>
+</style>
 </head>
-<body>
-   <div id="header">
-   <div id="username"><?php 
-	echo $_SESSION["email"];
-	?></div>
-   <div id="headerlist">
-   	<ul id="hlist">
-   		<li id="hli"><a href="/home">Home</a></li>
-   		<li id="hli"><a href="">Statistic</a></li>
-   		<li id="hli"><a>Options</a></li>
-   		<li id="hli">
-   				<form action="home" method="post">
-             <button  type = "submit" name = "home">Logout</button>
-       		</form>
-       </li>
-   	</ul>
-   </div>
-   </div>
+
+<body id="logbody" onload="checkValue()">
+   
+<?php include ("navigation.html.php");?>
    <div id="content">
-   <p id="test"></p>
+   <div class="block">
+   <div class="switchlabl">all</div>
+   		<label class="switch">
+  			<input type="checkbox" id="lifecheck" onclick="checkValue()">
+  			<div class="slider round"></div>
+		</label>
+		<div class="switchlabl" style="margin-left: 50px">heute</div>
+		</div>
+		<br>
+   <div style="clear: both;"></div>
 	  <div class="block">
 	  <p>Total hours:</p> 
 	  <p>Total breaks:</p> 
@@ -109,38 +31,73 @@ button{
 	   </div>
 	   
 	   <div class="block">
-	  	<p id="workh" onload="loaddataFunction()" style="loat:left; visibility: hidden;height:0px; width:0px;"><?php echo $_SESSION["worksec"];?></p>
+	  	<p id="workh"  style="loat:left; visibility: hidden;height:0px; width:0px;"><?php echo $_SESSION["worksec"];?></p>
 	   	<p id="breakh" style="visibility:  hidden; width:0px;float:left; height:0px"><?php echo $_SESSION["breaksec"];?></p>
+	  	<p id="workhtoday"  style="loat:left; visibility: hidden;height:0px; width:0px;"><?php echo $_SESSION["worksectoday"];?></p>
+	   	<p id="breakhtoday" style="visibility:  hidden; width:0px;float:left; height:0px"><?php echo $_SESSION["breaksectoday"];?></p>
+	  	
 	  	</div>
 	   
 	</div>
-		       <div id="piechart" style="width: 900px; height: 500px; float:left"></div>
+		       <div id="piechart" style="width: 900px; height: 500px; float:left; "></div>
+	    <div id="footer"><p>M151 - Yannick Burkart</p></div>
 	
 	 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    function checkValue()
+	{
+	  var lfckv = document.getElementById("lifecheck").checked;
+  		if(lfckv===true){
+			//take today
+			var text = document.getElementById("workhtoday").innerHTML;
+		   	var text2 = document.getElementById("breakhtoday").innerHTML;
+		}else{
+			//take everything
+			var text = document.getElementById("workh").innerHTML;
+		   	var text2 = document.getElementById("breakh").innerHTML;
+		}
+		drawChart(text, text2);
+	}
+    
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
+      var lfckv = document.getElementById("lifecheck").checked;
 
-      function drawChart() {
-	   	var text = document.getElementById("workh").innerHTML;
-	   	var text2 = document.getElementById("breakh").innerHTML;
+      
+      function drawChart(text, text2) {
+          if(text==null){
+      	   	var text = document.getElementById("workh").innerHTML;
+      	   	var text2 = document.getElementById("breakh").innerHTML;
+          }
+
 	   	 		
         var data = google.visualization.arrayToDataTable([
           ['Task', 'a'],
           ['Work', text*100],
           ['Break',text2*100]
          ]);
-
+ 
         var options = {
           title: 'Work/Break',
           pieHole:0.4,
           pieSliceText:'label',
           tooltip: {trigger:'none'},
-        };
+          backgroundColor:'transparent',
+          colors: ['#9F9F9F', '#555555', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+          legend: {'textStyle':{'color':'white'}},
+          titleTextStyle: {
+              color: 'white',    // any HTML string color ('red', '#cc00cc')
+              bold: true,    // true or false
+          },
+          pieSliceBorderColor:'transparent',
+         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);   
+
+		
+
  	    
   		var pminutesLabel = document.getElementById("pminutes");
 	    var psecondsLabel = document.getElementById("pseconds");
@@ -150,13 +107,13 @@ button{
 	    var secondsLabel = document.getElementById("seconds");
 	    var hoursLabel = document.getElementById("hours");
 	    
-	    secondsLabel.innerHTML=pad(text);
-	    minutesLabel.innerHTML = pad(parseInt(text/60));
-	    hoursLabel.innerHTML = pad(parseInt(text/3600));
+	    secondsLabel.innerHTML=text%60;
+	    minutesLabel.innerHTML = pad(parseInt(text/60)%60);
+	    hoursLabel.innerHTML = (parseInt(text/3600)%24);
 	   
-	    psecondsLabel.innerHTML=pad(text2);
-	    pminutesLabel.innerHTML = pad(parseInt(text2/60));
-	    phoursLabel.innerHTML = pad(parseInt(text2/3600));
+	    psecondsLabel.innerHTML=text2%60;
+	    pminutesLabel.innerHTML = pad(parseInt(text2/60)%60);
+	    phoursLabel.innerHTML = (parseInt(text2/3600)%24);
 
 		function pad(val)
 	    {
@@ -171,5 +128,6 @@ button{
 	        }
 	    }
       }
+      
     </script>
 </body>

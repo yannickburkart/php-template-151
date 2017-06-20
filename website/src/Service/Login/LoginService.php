@@ -6,5 +6,6 @@ interface LoginService {
 	public function createacc($username, $password);
 	public function saveTime($username,$worksec, $breaksec);
 	public function loadStat($username);
+	public function loadToday($username);
 	
 }

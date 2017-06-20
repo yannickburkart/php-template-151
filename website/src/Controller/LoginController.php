@@ -80,14 +80,26 @@ class LoginController
   	{
   	//echo $this->template->render("statistic.html.php");
   	
-  	if($this->loginService->loadStat($_SESSION["email"])){
-  		echo $this->template->render("statistic.html.php");
+	  	if($this->loginService->loadStat($_SESSION["email"])){
+	  		echo $this->template->render("statistic.html.php");
+	  	}
+	  	else
+	  	{	//email already taken
+	  	header("Location: /createAccount");
+	  	
+	  	}
+	}
+  	public function loadToday()
+  	{
+  		
+  		if($this->loginService->loadToday($_SESSION["email"])){
+  			echo $this->template->render("home.html.php");
+  		}
+  		else
+  		{	//no timestamp today yet
+  			echo $this->template->render("home.html.php");
+  				
+  		}
   	}
-  	else
-  	{	//email already taken
-  	header("Location: /createAccount");
-  	
-  	}
-  }
-	
-}
+}	
+

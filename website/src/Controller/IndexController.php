@@ -24,7 +24,7 @@ class IndexController
   	echo $this->template->render("login.html.php");
   }
   public function home(){
-  	  	echo $this->template->render("home.html.php");
+		echo $this->template->render("home.html.php");
   }
   public  function showcreateacc(){
   	  	echo $this->template->render("createacc.html.php");
