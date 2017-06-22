@@ -43,7 +43,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			{
 				($factory->getLoginController())->loadToday($_SESSION);
 			}
-			else{
+			else{		
 				header( "Location: /login");
 					}
 			break;
@@ -66,7 +66,7 @@ switch($_SERVER["REQUEST_URI"]) {
 				Swift_Message::newInstance("Subject")
 				->setFrom(["gibz.module.151@gmail.com" => "Yannick Burkart"])
 				->setTo([$_SESSION["email"] => "Client"])
-				->setBody("this should be a token.")
+				->setBody("Ooops, feature still under construction. Ask page administrator for help.")
 				);	
 				($factory->getLoginController())->showLogin();
 				

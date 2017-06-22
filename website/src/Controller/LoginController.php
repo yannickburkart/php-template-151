@@ -24,6 +24,7 @@ class LoginController
 	}
 	public function login(array $data)
 	{
+		session_unset();
 		//log in again hacker....
 		if(!array_key_exists("email", $data) OR !array_key_exists("password", $data)) {
 			$this->showLogin();
@@ -57,7 +58,8 @@ class LoginController
 			header("Location: /mail");
 		}
 		else{
-			die("a");
+			header("Location: /home");
+				
 		}
 		
 	

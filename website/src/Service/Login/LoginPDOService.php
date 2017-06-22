@@ -12,15 +12,20 @@ class LoginPDOService implements LoginService
 	
 	public function authenticate($username, $password)
 	{
-		$stmt = $this ->pdo->prepare("SELECT * FROM user WHERE email=? AND password=?");
+		$stmt = $this ->pdo->prepare("SELECT * FROM user WHERE email=?");
 		$stmt->bindValue(1, $username);
-		$stmt->bindValue(2, $password);
 		$stmt->execute();
-		
+		//print_r($stmt);
 		if($stmt->rowCount() == 1) {
-		$_SESSION["email"] = $username;
-		return true;
-		} else {
+			$loginData=$stmt->fetchAll()[0];
+			$hash=$loginData['password'];
+			if (password_verify($password, $hash))
+			{
+				$_SESSION["email"] = $username;
+				return true;
+			}
+			return false;
+		}else {
 			return false;
 		}
 		
@@ -35,7 +40,8 @@ class LoginPDOService implements LoginService
 		if($stmt->rowCount() == 0) {
 			$stmt = $this ->pdo->prepare("INSERT INTO user (email, password) VALUES (?,?)");
 			$stmt->bindValue(1, $username);
-			$stmt->bindValue(2, $password);
+			$hash=password_hash($password, PASSWORD_DEFAULT);
+			$stmt->bindValue(2, $hash);
 			$stmt->execute();
 			return true;
 			

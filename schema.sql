@@ -13,12 +13,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`email`, `password`) VALUES
-('yannick.burkart@gmx.ch',	'123456'),
-('blau@gmx.ch',	'blau'),
-('nana@gmx.ch',	'nana'),
-('rot@gmx.ch',	'rot'),
-('orange@gmx.ch',	'orange'),
-('pink@gmx.ch',	'pink');
+('magenta@gmx.ch',	'$2y$10$Pe9N3w42rQY6jvi4xzRMKOJ49V5Vbrp9JitytDauSJa.AOomzp1QC');
 
 DROP TABLE IF EXISTS `work`;
 CREATE TABLE `work` (
@@ -29,7 +24,6 @@ CREATE TABLE `work` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `work` (`worksec`, `breaksec`, `User_email`, `Date`) VALUES
-(27200,	6402,	'pink@gmx.ch',	'2017-06-20 13:07:25'),
-(28905,	3200,	'pink@gmx.ch',	'2017-06-10 13:11:28'),
-(0,	22,	'pink@gmx.ch',	'2017-06-20 13:13:20');
-
+(27200,	6402,	'magenta@gmx.ch',	'2017-06-20 13:07:25'),
+(28905,	3200,	'magenta@gmx.ch',	'2017-06-10 13:11:28'),
+(0,	22,	'magenta@gmx.ch',	'2017-06-20 13:13:20');
