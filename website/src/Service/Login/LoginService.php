@@ -7,5 +7,5 @@ interface LoginService {
 	public function saveTime($username,$worksec, $breaksec);
 	public function loadStat($username);
 	public function loadToday($username);
-	
+	public function getPW($username);
 }

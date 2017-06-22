@@ -58,7 +58,28 @@ switch($_SERVER["REQUEST_URI"]) {
 			}
 			break;
 		case "/statistic":
+			
 				($factory->getLoginController())->statistic();
+			break;
+			case "/mail":
+				$factory->getMailer()->send(
+				Swift_Message::newInstance("Subject")
+				->setFrom(["gibz.module.151@gmail.com" => "Yannick Burkart"])
+				->setTo([$_SESSION["email"] => "Client"])
+				->setBody("this should be a token.")
+				);	
+				($factory->getLoginController())->showLogin();
+				
+				
+				break;
+		case "/forgotPW":
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				($factory->getLoginController())->restorePW($_POST);	
+			}
+			else
+			{
+				($factory->getLoginController())->forgotPW();
+			}
 			break;
 		case "/savetime":
 				if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -69,7 +90,6 @@ switch($_SERVER["REQUEST_URI"]) {
 					($factory->getIndexController())->loadToday($_SESSION);
 				}
 				else{
-					die("asdf");
 					header( "Location: /login");
 				}
 		$matches = [];

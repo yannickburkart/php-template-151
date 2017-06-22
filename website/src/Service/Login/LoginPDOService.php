@@ -110,5 +110,20 @@ class LoginPDOService implements LoginService
     	return true;
     
     }
+    public  function getPW($username)
+    {
+    	$stmt = $this ->pdo->prepare("SELECT * FROM user WHERE email=?");
+    	$stmt->bindValue(1, $username);
+    	$stmt->execute();
+    	$result = $stmt->fetchAll();
+    	 
+    	if($stmt->rowCount() == 1) {
+    		$_SESSION["email"] = $username;
+    		//send tokens instead of pw
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 }
 ?>

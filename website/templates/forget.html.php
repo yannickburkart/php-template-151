@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Login</title>
+<title>Forget Password</title>
 <style type="text/css">
 <?php include ("style.css");?>
 </style>
@@ -17,11 +17,7 @@
 		   <ul class="logul">
 		   	<li class="logli"><label>Email</label></li>
 		   	<li class="logli"> <input type="email" name="email"></li>
-		   	<li class="logli"><label>Password</label></li>
-		   	<li class="logli"> <input type="password" name="password"></li>
-		   	<li class="logli"> <a href="createAccount">create account</a><li>
-		   	<li class="logli"><button  type = "submit" name = "login">Login</button></li>
-   		   	<li class="logli"> <a href="forgotPW">forgot your password?</a><li>
+		   	<li class="logli"><button  type = "submit" name = "send">Send</button></li>
 		   </ul>
 	   </form>
    </div>

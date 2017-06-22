@@ -45,6 +45,23 @@ class LoginController
 		}
 		
 	}
+	public function forgotPW()
+	{
+		echo $this->template->render("forget.html.php");
+			
+	}
+	public function restorePW(array $data)
+	{
+		//db request
+		if($this->loginService->getPW($data["email"])){
+			header("Location: /mail");
+		}
+		else{
+			die("a");
+		}
+		
+	
+	}
 	
 	public function showLogin()
 	{
